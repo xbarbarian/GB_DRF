@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import UserList from './components/users.js'
 import axios from 'axios'
@@ -15,7 +14,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api/users')
+        axios.get('http://127.0.0.1:8000/api/users/')
      	.then(response => {
      	    const users = response.data
              this.setState(

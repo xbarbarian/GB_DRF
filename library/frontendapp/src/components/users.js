@@ -4,6 +4,8 @@ const UserItem = ({users}) => {
    return (
        <tr>
            <td>
+               {users.username}
+           </td>           <td>
                {users.first_name}
            </td>
            <td>
