@@ -19,5 +19,5 @@ class Todo(models.Model):
     note_text = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     update_at = models.DateTimeField(auto_now=True, editable=False)
-    users = models.OneToOneField(CustomUser, on_delete=models.PROTECT)
+    users = models.ManyToManyField(CustomUser, on_delete=models.PROTECT)
     status = models.BooleanField(default=True)
