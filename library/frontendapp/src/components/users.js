@@ -21,14 +21,7 @@ const UserItem = ({users}) => {
 const UserList = ({users}) => {
    return (
        <div className="outer">
-           <div className="header">
-               <ul>
-                   <li><a href="#">Главная</a></li>
-                   <li><a href="#">О нас</a></li>
-                   <li><a href="#">Галерея</a></li>
-                   <li><a href="#">Контакты</a></li>
-               </ul>
-           </div>
+
            <div className="inner">
                <table className="Table">
                    <th>
@@ -46,10 +39,6 @@ const UserList = ({users}) => {
                    {users.map((users) => <UserItem users={users}/>)}
 
                </table>
-           </div>
-           <div className="footer">
-
-               <p>this footer</p>
            </div>
 
        </div>
