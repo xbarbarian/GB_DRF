@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import './components/Footer.js'
 import UserList from './components/users.js'
 import axios from 'axios'
 import Footer from "./components/Footer";
