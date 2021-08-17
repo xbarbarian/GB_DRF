@@ -1,15 +1,17 @@
 import React from "react";
-
+import {HashRouter, Route, Link, Switch} from 'react-router-dom'
 function Menu() {
     return (
         <div className="menu">
             <ul>
-                <li><a href="#">Главная</a></li>
-                <li><a href="#">О нас</a></li>
-                <li><a href="#">Галерея</a></li>
-                <li><a href="#">Контакты</a></li>
+                <li><Link to="/">Пользователи</Link></li>
+                <li><Link to="/project">Проекты</Link></li>
+                <li><Link to="/todo">Задачи</Link></li>
             </ul>
-        </div>)
+        </div>
+
+    )
+
 }
 
 export default Menu;
