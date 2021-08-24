@@ -22,9 +22,9 @@ class TestTodoViewSet(TestCase):
     def test_get_list(self):
         factory = APIRequestFactory()
         request = factory.get('/api/user/')
-        view = ToDoModelViewSet.as_view({'get':'list'})
+        view = ToDoModelViewSet.as_view({'get': 'list'})
         response = view(request)
-        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class TestProjectViewSet(TestCase):
@@ -32,6 +32,6 @@ class TestProjectViewSet(TestCase):
     def test_get_list(self):
         factory = APIRequestFactory()
         request = factory.get('/api/user/')
-        view = ProjectModelViewSet.as_view({'get':'list'})
+        view = ProjectModelViewSet.as_view({'get': 'list'})
         response = view(request)
-        self.assertEqual(response.status_code,status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
