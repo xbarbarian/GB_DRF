@@ -1,19 +1,19 @@
 import React from "react";
 
-const UserItem = ({users}) => {
+const UserItem = ({user}) => {
     return (
         <tr>
             <td>
-                {users.username}
+                {user.username}
             </td>
             <td>
-                {users.first_name}
+                {user.first_name}
             </td>
             <td>
-                {users.last_name}
+                {user.last_name}
             </td>
             <td>
-                {users.email}
+                {user.email}
             </td>
         </tr>
     )
@@ -25,20 +25,25 @@ const UserList = ({users}) => {
 
             <div className="inner">
                 <table className="Table">
-                    <th>
-                        User name
-                    </th>
-                    <th>
-                        First name
-                    </th>
-                    <th>
-                        Last Name
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    {users.map((users) => <UserItem users={users}/>)}
-
+                    <thead>
+                    <tr>
+                        <th>
+                            User name
+                        </th>
+                        <th>
+                            First name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {users.map((user, idx) => <UserItem user={user} key={user.email}/>)}
+                    </tbody>
                 </table>
             </div>
 

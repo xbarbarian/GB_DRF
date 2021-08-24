@@ -16,9 +16,8 @@ const TodoItem = ({todo}) => {
                 {todo.is_active}
             </td>
             <td>
-                {todo.project}
+                {todo.project.name}
             </td>
-
         </tr>
     )
 }
@@ -29,23 +28,28 @@ const TodoList = ({todos}) => {
 
             <div className="inner">
                 <table className="Table">
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Create_at
-                    </th>
-                    <th>
-                        Update_at
-                    </th>
-                    <th>
-                        is_active
-                    </th>
-                    <th>
-                        Project name
-                    </th>
-                    {todos.map((todo) => <TodoItem todo={todo}/>)}
-
+                    <thead>
+                    <tr>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Create_at
+                        </th>
+                        <th>
+                            Update_at
+                        </th>
+                        <th>
+                            is_active
+                        </th>
+                        <th>
+                            Project name
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {todos.map((todo, idx) => <TodoItem todo={todo} key={todo.id}/>)}
+                    </tbody>
                 </table>
             </div>
 
