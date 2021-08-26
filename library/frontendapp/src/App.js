@@ -102,6 +102,30 @@ class App extends React.Component {
         this.get_token_from_storage()
     }
 
+    deleteUser(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/users/${id}`, {headers})
+            .then(response => {
+
+                    this.load_data();
+                }
+            ).catch(error => console.log(error))
+
+        console.log('delete' + id)
+    }
+
+    deleteTodo(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/todo/${id}`, {headers})
+            .then(response => {
+
+                    this.load_data();
+                }
+            ).catch(error => console.log(error))
+
+        console.log('delete' + id)
+    }
+
     render() {
         return (
             <div className="container">
@@ -125,10 +149,16 @@ class App extends React.Component {
                         </ul>
                     </nav>
                     <Switch>
-                        <Route exact path='/' component={() => <UserList users={this.state.users}/>}/>
+                        <Route exact path='/' component={() => <UserList
+                            users={this.state.users}
+                            deleteUser={(id) => this.deleteUser(id)}
+                        />}/>
                         <Route exact path='/project/'
                                component={() => <ProjectList projects={this.state.projects}/>}/>
-                        <Route exact path='/todo/' component={() => <TodoList todos={this.state.todos}/>}/>
+                        <Route exact path='/todo/' component={() => <TodoList
+                            todos={this.state.todos}
+                            deleteTodo={(id) => this.deleteTodo(id)}
+                        />}/>
                         <Route exact path='/login/' component={() => <LoginForm
                             get_token={(username, password) => this.get_token(username, password)}/>}/>
                         <Route component={NotFound404}/>

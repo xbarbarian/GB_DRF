@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserItem = ({user}) => {
+const UserItem = ({user, deleteUser}) => {
     return (
         <tr>
             <td>
@@ -15,11 +15,14 @@ const UserItem = ({user}) => {
             <td>
                 {user.email}
             </td>
+            <td>
+                <button onClick={() => deleteUser(user.id)} type='button'>DELETE</button>
+            </td>
         </tr>
     )
 }
 
-const UserList = ({users}) => {
+const UserList = ({users, deleteUser}) => {
     return (
         <div className="outer">
 
@@ -42,7 +45,7 @@ const UserList = ({users}) => {
                     </tr>
                     </thead>
                     <tbody>
-                    {users.map((user, idx) => <UserItem user={user} key={user.email}/>)}
+                    {users.map((user, idx) => <UserItem user={user} key={user.id} deleteUser={deleteUser}/>)}
                     </tbody>
                 </table>
             </div>

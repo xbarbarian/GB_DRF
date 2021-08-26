@@ -11,7 +11,10 @@ const ProjectItem = ({project}) => {
             </td>
             <td>
                 {project.users_list[0].username}
-                </td>
+            </td>
+            <td>
+                <button type='button'>DELETE</button>
+            </td>
 
         </tr>
     )
