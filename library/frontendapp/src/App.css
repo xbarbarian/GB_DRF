@@ -70,9 +70,10 @@ li {
 .Table {
 
     /*text-align: center;*/
-    width: 300px; /* Ширина таблицы */
+    width: 500px; /* Ширина таблицы */
     border: 1px solid green; /* Рамка вокруг таблицы */
     margin: auto; /* Выравниваем таблицу по центру окна  */
+    text-align: center;
 }
 
 

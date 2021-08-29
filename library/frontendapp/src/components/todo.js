@@ -4,7 +4,7 @@ const TodoItem = ({todo, deleteTodo}) => {
     return (
         <tr>
             <td>
-                {todo.text}
+                {todo.description}
             </td>
             <td>
                 {todo.create_at}
@@ -16,7 +16,10 @@ const TodoItem = ({todo, deleteTodo}) => {
                 {todo.is_active}
             </td>
             <td>
-                {todo.project.name}
+                {todo.project}
+            </td>
+            <td>
+                {todo.user}
             </td>
             <td>
                 <button onClick={() => deleteTodo(todo.id)} type='button'>DELETE</button>
@@ -47,6 +50,9 @@ const TodoList = ({todos, deleteTodo}) => {
                         </th>
                         <th>
                             Project name
+                        </th>
+                        <th>
+                            User name
                         </th>
                     </tr>
                     </thead>

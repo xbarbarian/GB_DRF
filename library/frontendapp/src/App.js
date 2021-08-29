@@ -9,6 +9,8 @@ import ProjectList from "./components/project";
 import Header from "./components/header";
 import TodoList from "./components/todo";
 import LoginForm from "./components/loginform";
+import Projectform from "./components/Projectform";
+import Todoform from "./components/Todoform";
 
 
 const NotFound404 = ({location}) => {
@@ -126,6 +128,54 @@ class App extends React.Component {
         console.log('delete' + id)
     }
 
+    deleteProject(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/todo/${id}`, {headers})
+            .then(response => {
+                    this.load_data();
+                }
+            ).catch(error => console.log(error.response))
+
+        console.log('delete' + id)
+    }
+
+    createProject(name, url, users) {
+        console.log(name, url, users,)
+        const headers = this.get_headers()
+        axios.post('http://127.0.0.1:8000/api/project/',
+            {
+                "name": name,
+                "url": url,
+                "users_list": users
+            },
+            {headers})
+            .then(response => {
+                    this.load_data();
+                }
+            ).catch(error => console.log(error))
+    }
+
+    createTodo(description, projects, users) {
+        console.log(description, projects, users)
+        if (!description || !projects || !users) {
+            console.log("Empty params:",'description',!description, 'projects',!projects, 'users',!users)
+            return;
+        }
+
+        const headers = this.get_headers()
+        axios.post('http://127.0.0.1:8000/api/todo/',
+            {
+                "description": description,
+                "project": projects,
+                "user": users
+            },
+            {headers})
+            .then(response => {
+                    this.load_data();
+                }
+            ).catch(error => console.log(error.response))
+    }
+
     render() {
         return (
             <div className="container">
@@ -143,6 +193,12 @@ class App extends React.Component {
                                 <Link to='/todo'>Todo</Link>
                             </li>
                             <li>
+                                <Link to='/project/create'>Create Project</Link>
+                            </li>
+                            <li>
+                                <Link to='/todo/create'>Create ToDo</Link>
+                            </li>
+                            <li>
                                 {this.is_authenticated() ? <button onClick={() =>
                                     this.logout()}>Logout</button> : <Link to='/login'>Login</Link>}
                             </li>
@@ -154,13 +210,25 @@ class App extends React.Component {
                             deleteUser={(id) => this.deleteUser(id)}
                         />}/>
                         <Route exact path='/project/'
-                               component={() => <ProjectList projects={this.state.projects}/>}/>
+                               component={() => <ProjectList
+                                   projects={this.state.projects}
+                                   deleteProject={(id) => this.deleteProject(id)}
+                               />}/>
                         <Route exact path='/todo/' component={() => <TodoList
                             todos={this.state.todos}
                             deleteTodo={(id) => this.deleteTodo(id)}
                         />}/>
-                        <Route exact path='/login/' component={() => <LoginForm
-                            get_token={(username, password) => this.get_token(username, password)}/>}/>
+                        <Route exact path='/project/create' component={() =>
+                            <Projectform
+                                users={this.state.users}
+                                createProject={(name, users, url) => this.createProject(name, users, url)}/>}/>
+                        <Route exact path='/todo/create' component={() =>
+                            <Todoform
+                                projects={this.state.projects}
+                                users={this.state.users}
+                                createTodo={(description, projects, users) => this.createTodo(description, projects, users)}/>}/>
+                        <Route exact path='/login/' component={() =>
+                            <LoginForm get_token={(username, password) => this.get_token(username, password)}/>}/>
                         <Route component={NotFound404}/>
                     </Switch>
                 </BrowserRouter>

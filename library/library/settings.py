@@ -28,7 +28,6 @@ SECRET_KEY = 'django-insecure-z7dj$dlfhb5-e!nu_*7@)2*!)y!3vwrxsnx$**2#f7w!s_&_n)
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -44,7 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-   'django_filters',
+    'django_filters',
     "graphene_django",
     # my app
     'authors',
@@ -55,13 +54,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'library.urls'
@@ -69,7 +68,9 @@ ROOT_URLCONF = 'library.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / '/frontendapp/build' ,
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,6 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    BASE_DIR / '/frontendapp/build/static',
+)
 
 GRAPHENE = {
     "SCHEMA": "library.schema.schema"
@@ -141,19 +145,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://127.0.0.1:3000",
-#     "http://localhost:3000",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8000",
+    "http://localhost:3000",
+    "http://localhost:8000",
+]
 #
-# CORS_ALLOW_METHODS = [
-# 'DELETE',
-# 'GET',
-# 'OPTIONS',
-# 'PATCH',
-# 'POST',
-# 'PUT',
-# ]
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 # from rest_framework.versioning import AcceptHeaderVersioning
 
 REST_FRAMEWORK = {

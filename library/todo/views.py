@@ -20,6 +20,13 @@ class ProjectModelViewSet(ModelViewSet):
     pagination_class = ProjectLimitOffsetPagination
     filterset_fields = ['name']
 
+    def destroy(self, request, *args, **kwargs):
+        todo = Project.objects.get(id=int(self.kwargs['pk']))
+        todo.is_active = False
+        todo.save()
+        serializer = ProjectModelSerializer(todo)
+        return Response(serializer.data)
+
 
 class ToDoModelViewSet(ModelViewSet):
     queryset = ToDo.objects.all()
